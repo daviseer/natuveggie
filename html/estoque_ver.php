@@ -29,11 +29,33 @@ $con = new Conexao();
 //saldo por pacotes JUNTANDO e exibindo nomes dos produtos e tipos de pacotes dos respectivos logs
 
 //pega do BD os nomes dos produtos
-$sql2 = 'SELECT p.Produto_nome FROM produtos AS p ';
+$sql2 = 'SELECT p.*
+ FROM produtos AS p ';
 $resultado2 = $con->query($sql2);
 $produto = $resultado2->fetchAll(PDO::FETCH_OBJ);
+
+?>
+
+
+
+<table class="table table-bordered table-striped table-responsive-md table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Produto</th>
+      <th scope="col">2 un</th>
+      <th scope="col">5 un</th>
+      <th scope="col">10 un</th>
+    </tr>
+  </thead>
+<tbody>
+
+
+<?php
 //para cada item anterior (ou seja, cada nome de produto) faz parte do loop
+
 foreach ($produto as $prod) {
+
+
   $sql_pacotes_produtos_2un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
   SUM(e.quantidade) entradas_mes
   FROM log_estoque as e
@@ -49,7 +71,7 @@ foreach ($produto as $prod) {
 
 
 
-// um selesct para filtrar logs por pacotes de acordo com o tipo
+// um select para filtrar logs por pacotes de acordo com o tipo
 
 //
   $sql_pacotes_produtos_5un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
@@ -100,7 +122,37 @@ foreach ($produto as $prod) {
     }
 ?>
 
-<div class="col-md" >
+
+    <?php
+
+         echo '
+    <tr>
+      <th scope="row">'. $prod->Produto_nome .'</th>
+      <td>
+        ';
+          if (isset($pac_prod_2un->entradas_mes) ) {  echo  $pac_prod_2un->entradas_mes; } else {echo 0; }
+         ; echo'
+      </td>
+      <td>
+        ';
+
+        if (isset($pac_prod_5un->entradas_mes)) {  echo  $pac_prod_5un->entradas_mes; } else {echo 0; }
+        ; echo'
+      </td>
+      <td>
+        ';
+
+         if (isset($pac_prod_10un->entradas_mes)) {  echo  $pac_prod_10un->entradas_mes; } else {echo 0; }
+
+        ; echo'
+      </td>
+    </tr>
+
+  ';}}}}?>
+
+  </tbody>
+</table>
+<!-- <div class="col-md" >
   <div class="card border-dark text-center" style="width: 18rem; margin: 1%">
     <div class="card-body" style="padding-left: 0%; padding-right: 0%;" >
       <h2 class="card-title text-center "><?php echo $prod->Produto_nome; ?></h2>
@@ -120,15 +172,15 @@ foreach ($produto as $prod) {
 
           </li>
         </ul>
-        <h5 class="card-header">Total: </h5><br>
       </form>
       <button type="submit" class="btn btn-primary">Editar</button>
     </div>
   </div>
-</div>
+</div> -->
 
+<!-- <h5 class="card-header">Total: </h5><br> -->
 
-
-<?php }}}} ?>
+<?php
+//}}}} ?>
 
 </div>
