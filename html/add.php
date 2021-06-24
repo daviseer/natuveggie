@@ -114,13 +114,6 @@ foreach ($produto as $prod) {
   $pacotes_produtos9 = $result_pac9->fetchAll(PDO::FETCH_OBJ);
   if (empty($pacotes_produtos9) ){ $pacotes_produtos9 = ['0' => '0'];}
 
-  // foreach($group as $key=>$value)
-  // {
-  //    $sum+= $value;
-  // }
-  // echo $sum;
-
-  // foreach ($pacotes_produtos9 as $pac_prod9un) {
 
       foreach ($pacotes_produtos2 as $pac_prod_2un) {
         foreach ($pacotes_produtos5 as $pac_prod_5un) {
@@ -136,20 +129,20 @@ foreach ($produto as $prod) {
     }
 ?>
 <!-- CARDS -->
-<div class="col-md" >
+<div class="col-4" >
   <div class="card border-dark text-center" style="width: 18rem; margin: 1%">
     <div class="card-body" style="padding-left: 0%; padding-right: 0%;" >
-      <h2 class="card-title text-center "><?php echo $prod->Produto_nome; ?></h2>
+      <h2 class="card-title text-center " ><?php echo $prod->Produto_nome; ?></h2>
       <form class="" action="bd/add_bd.php" method="post" enctype="multipart/form-data">
         <h5 class="card-header text-center" >Pacotes:</h5>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <div class="input-group input-group-md">
-              <span class="input-group-text">2 un. atual = <?php  if (isset($pac_prod_2un->entradas_mes)) {  echo  $pac_prod_2un->entradas_mes; } else {echo 0; }  ?></span>
+              <span class="input-group-text">2 </span>
 
                 <input type="hidden" name="id_produto" value="<?php echo $prod->ID ?>">
 
-                <input type="number" name="2un_idprod<?php echo $prod->ID; ?>" class="form-control" placeholder="Add aqui!" >
+                <input type="number" name="2un_idprod<?php echo $prod->ID; ?>" class="form-control" placeholder="<?php  if (isset($pac_prod_2un->entradas_mes)) {  echo  $pac_prod_2un->entradas_mes; } else {echo 0; }  ?>" >
 
             </div>
           </li>
@@ -195,10 +188,10 @@ foreach ($produto as $prod) {
                 </li>
                 <li class="list-group-item">
                   <div class="input-group input-group-md">
-                    <span class="input-group-text">10un. atual= '; if (isset($pac_prod_10un->entradas_mes)) {  echo  $pac_prod_10un->entradas_mes; } else {echo 0; }; echo  '</span>
+                    <span class="input-group-text">10 </span>
 
 
-                    <input type="number" name="10un_idprod'. $prod->ID .'" class="form-control" placeholder="Add aqui!">
+                    <input type="number" name="10un_idprod'. $prod->ID .'" class="form-control" placeholder="'; if (isset($pac_prod_10un->entradas_mes)) {  echo  $pac_prod_10un->entradas_mes; } else {echo 0; }; echo  '">
 
                   </div>
                 </li>
@@ -229,7 +222,7 @@ foreach ($produto as $prod) {
 
          ?>
        </h5><br> -->
-        <button type="submit" class="btn btn-primary" form="margin: 5%">Enviar</button>
+        <button type="submit" class="btn btn-primary" style="margin: 5%">Enviar</button>
       </form>
     </div>
   </div>
