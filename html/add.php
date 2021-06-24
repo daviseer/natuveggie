@@ -42,7 +42,18 @@ $produto = $resultado2->fetchAll(PDO::FETCH_OBJ);
 //para cada item anterior (ou seja, cada nome de produto) faz parte do loop
 foreach ($produto as $prod) {
   $sql_pacotes_produtos_2un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
-  SUM(e.quantidade) entradas_mes
+  CASE
+WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+ELSE e.QUANTIDADE * -1
+END quantidade,
+SUM(e.quantidade) entradas,
+(select
+sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "E") -
+(select sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "S") AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -60,7 +71,18 @@ foreach ($produto as $prod) {
 
 //
   $sql_pacotes_produtos_5un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
-  SUM(e.quantidade) entradas_mes
+  CASE
+WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+ELSE e.QUANTIDADE * -1
+END quantidade,
+SUM(e.quantidade) entradas,
+(select
+sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "E") -
+(select sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "S") AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -74,7 +96,18 @@ foreach ($produto as $prod) {
 
 //
   $sql_pacotes_produtos_10un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
-  SUM(e.quantidade) entradas_mes
+  CASE
+WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+ELSE e.QUANTIDADE * -1
+END quantidade,
+SUM(e.quantidade) entradas,
+(select
+sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "E") -
+(select sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "S") AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -87,7 +120,18 @@ foreach ($produto as $prod) {
   if (empty($pacotes_produtos10) ){ $pacotes_produtos10 = ['0' => '0'];}
 //
   $sql_pacotes_produtos_6un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
-  SUM(e.quantidade) entradas_mes
+  CASE
+WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+ELSE e.QUANTIDADE * -1
+END quantidade,
+SUM(e.quantidade) entradas,
+(select
+sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "E") -
+(select sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "S") AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -102,7 +146,18 @@ foreach ($produto as $prod) {
 
 //
   $sql_pacotes_produtos_9un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
-  SUM(e.quantidade) entradas_mes
+  CASE
+	WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+	ELSE e.QUANTIDADE * -1
+END quantidade,
+SUM(e.quantidade) entradas,
+  (select
+sum(el.quantidade) from log_estoque el
+	where el.PRODUTO_ID = e.PRODUTO_ID
+  and el.movimento = "E") -
+(select sum(el.quantidade) from log_estoque el
+	where el.PRODUTO_ID = e.PRODUTO_ID
+	and el.movimento = "S") AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -142,7 +197,7 @@ foreach ($produto as $prod) {
 
                 <input type="hidden" name="id_produto" value="<?php echo $prod->ID ?>">
 
-                <input type="number" name="2un_idprod<?php echo $prod->ID; ?>" class="form-control" placeholder="<?php  if (isset($pac_prod_2un->entradas_mes)) {  echo  $pac_prod_2un->entradas_mes; } else {echo 0; }  ?>" >
+                <input type="number" name="2un_idprod<?php echo $prod->ID; ?>" class="form-control" placeholder="<?php  if (isset($pac_prod_2un->saldo)) {  echo  $pac_prod_2un->saldo; } else {echo $pac_prod_2un->entradas; }  ?>" >
 
             </div>
           </li>
@@ -157,7 +212,7 @@ foreach ($produto as $prod) {
                 <span class="input-group-text">6 </span>
 
 
-                  <input type="number" name="6un_idprod'.$prod->ID .'" class="form-control" placeholder="';  if (isset($pac_prod_6un->entradas_mes)) {  echo $pac_prod_6un->entradas_mes; } else {echo 0; }; echo '">
+                  <input type="number" name="6un_idprod'.$prod->ID .'" class="form-control" placeholder="';  if (isset($pac_prod_6un->saldo)) {  echo $pac_prod_6un->saldo; } elseif (isset($pac_prod_6un->entradas)){  echo $pac_prod_6un->entradas; }else{echo 0;}; echo '">
 
               </div>
             </li>
@@ -168,7 +223,7 @@ foreach ($produto as $prod) {
                 <span class="input-group-text">9 </span>
 
 
-                  <input type="number" name="9un_idprod'. $prod->ID .'" class="form-control" placeholder="';  if (isset($pac_prod_9un->entradas_mes)) {  echo $pac_prod_9un->entradas_mes; } else {echo 0; }; echo '">
+                  <input type="number" name="9un_idprod'. $prod->ID .'" class="form-control" placeholder="';  if (isset($pac_prod_9un->saldo)) {  echo $pac_prod_9un->saldo; } else {echo $pac_prod_9un->entradas; }; echo '">
 
               </div>
             </li>
@@ -182,7 +237,7 @@ foreach ($produto as $prod) {
                     <span class="input-group-text">5 </span>
 
 
-                    <input type="number" name="5un_idprod'. $prod->ID .'" class="form-control" placeholder="'; if (isset($pac_prod_5un->entradas_mes)) {  echo  $pac_prod_5un->entradas_mes; } else {echo 0; }; echo  '">
+                    <input type="number" name="5un_idprod'. $prod->ID .'" class="form-control" placeholder="'; if (isset($pac_prod_5un->saldo)) {  echo  $pac_prod_5un->saldo; } else {echo $pac_prod_5un->entradas; }; echo  '">
 
                   </div>
                 </li>
@@ -191,7 +246,7 @@ foreach ($produto as $prod) {
                     <span class="input-group-text">10 </span>
 
 
-                    <input type="number" name="10un_idprod'. $prod->ID .'" class="form-control" placeholder="'; if (isset($pac_prod_10un->entradas_mes)) {  echo  $pac_prod_10un->entradas_mes; } else {echo 0; }; echo  '">
+                    <input type="number" name="10un_idprod'. $prod->ID .'" class="form-control" placeholder="'; if (isset($pac_prod_10un->saldo)) {  echo  $pac_prod_10un->saldo; } else {echo $pac_prod_10un->entradas; }; echo  '">
 
                   </div>
                 </li>
@@ -209,14 +264,25 @@ foreach ($produto as $prod) {
   //
 // O problema é multiplicar os pacotes pelos valores deles mesmos e somar tudo no final; nao é prioridade agora
   // $soma_total_select = "SELECT e.PRODUTO_ID,
-  // SUM(e.quantidade) entradas_mes
+  // CASE
+// WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+// ELSE e.QUANTIDADE * -1
+// END quantidade,
+//SUM(e.quantidade) entradas,
+// (select
+// sum(el.quantidade) from log_estoque el
+// where el.PRODUTO_ID = e.PRODUTO_ID
+// and el.movimento = "E") -
+// (select sum(el.quantidade) from log_estoque el
+// where el.PRODUTO_ID = e.PRODUTO_ID
+// and el.movimento = "S") AS saldo
   // FROM log_estoque as e
   // WHERE e.dh_movimento between '2021-01-01 00:01:00' and '2022-01-01 00:01:00'
   // and e.movimento = 'E' and e.PRODUTO_ID =' ".$prod->ID."'
   // group by 1";
   // $soma_total = $con->query($soma_total_select);
   // $soma_total_result = $soma_total->fetchAll(PDO::FETCH_OBJ);
-  // echo $soma_total_result->entradas_mes;
+  // echo $soma_total_result->saldo;
 
 
 

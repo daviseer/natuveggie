@@ -42,7 +42,18 @@ $produto = $resultado2->fetchAll(PDO::FETCH_OBJ);
 //para cada item anterior (ou seja, cada nome de produto) faz parte do loop
 foreach ($produto as $prod) {
   $sql_pacotes_produtos_2un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
-  SUM(e.quantidade) entradas_mes
+  CASE
+WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+ELSE e.QUANTIDADE * -1
+END quantidade,
+SUM(e.quantidade) entradas,
+(select
+sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "E") -
+(select sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "S") AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -60,7 +71,18 @@ foreach ($produto as $prod) {
 
 //
   $sql_pacotes_produtos_5un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
-  SUM(e.quantidade) entradas_mes
+  CASE
+WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+ELSE e.QUANTIDADE * -1
+END quantidade,
+SUM(e.quantidade) entradas,
+(select
+sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "E") -
+(select sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "S") AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -74,7 +96,18 @@ foreach ($produto as $prod) {
 
 //
   $sql_pacotes_produtos_10un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
-  SUM(e.quantidade) entradas_mes
+  CASE
+WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+ELSE e.QUANTIDADE * -1
+END quantidade,
+SUM(e.quantidade) entradas,
+(select
+sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "E") -
+(select sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "S") AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -87,7 +120,18 @@ foreach ($produto as $prod) {
   if (empty($pacotes_produtos10) ){ $pacotes_produtos10 = ['0' => '0'];}
 //
   $sql_pacotes_produtos_6un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
-  SUM(e.quantidade) entradas_mes
+  CASE
+WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+ELSE e.QUANTIDADE * -1
+END quantidade,
+SUM(e.quantidade) entradas,
+(select
+sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "E") -
+(select sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "S") AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -102,7 +146,18 @@ foreach ($produto as $prod) {
 
 //
   $sql_pacotes_produtos_9un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
-  SUM(e.quantidade) entradas_mes
+  CASE
+WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+ELSE e.QUANTIDADE * -1
+END quantidade,
+SUM(e.quantidade) entradas,
+(select
+sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "E") -
+(select sum(el.quantidade) from log_estoque el
+where el.PRODUTO_ID = e.PRODUTO_ID
+and el.movimento = "S") AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
