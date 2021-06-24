@@ -111,7 +111,7 @@ foreach ($produto as $prod) {
   GROUP BY 2';
 
   $result_pac9 = $con->query($sql_pacotes_produtos_9un);
-  $pacotes_produtos6 = $result_pac9->fetchAll(PDO::FETCH_OBJ);
+  $pacotes_produtos9 = $result_pac9->fetchAll(PDO::FETCH_OBJ);
   if (empty($pacotes_produtos9) ){ $pacotes_produtos9 = ['0' => '0'];}
 
   // foreach($group as $key=>$value)
@@ -121,7 +121,7 @@ foreach ($produto as $prod) {
   // echo $sum;
 
   // foreach ($pacotes_produtos9 as $pac_prod9un) {
-  //   foreach ($pacotes_produtos6 as $pac_prod_6un) {
+
       foreach ($pacotes_produtos2 as $pac_prod_2un) {
         foreach ($pacotes_produtos5 as $pac_prod_5un) {
           foreach ($pacotes_produtos10 as $pac_prod_10un) {
@@ -164,7 +164,7 @@ foreach ($produto as $prod) {
                 <span class="input-group-text">6 </span>
 
 
-                  <input type="number" name="6un_idprod'. $prod->ID .'" class="form-control" placeholder="';  if (isset($pac_prod_6un->entradas_mes)) {  echo $pac_prod_6un->entradas_mes; } else {echo 0; }; echo '">
+                  <input type="number" name="6un_idprod'.$prod->ID .'" class="form-control" placeholder="';  if (isset($pac_prod_6un->entradas_mes)) {  echo $pac_prod_6un->entradas_mes; } else {echo 0; }; echo '">
 
               </div>
             </li>
