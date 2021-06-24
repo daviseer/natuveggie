@@ -17,7 +17,7 @@
 
 <div class="row justify-content-md-center align-items-center">
   <div class="col-md12">
-   <h2 class="alert alert-danger">Apenas adicionar! Não diminuir</h2>
+   <h3 class="alert alert-danger">Adicionar um por um!</h3>
  </div>
 </div>
 <div class="row align-items-start">
