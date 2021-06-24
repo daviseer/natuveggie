@@ -154,40 +154,41 @@ foreach ($produto as $prod) {
             </div>
           </li>
 
-          <?php if($prod->Produto_nome == "Almôndegas"){ echo '
-          <li class="list-group-item">
-            <div class="input-group input-group-md">
-              <span class="input-group-text">6 un. total = ';  if (isset($pac_prod_6un->entradas_mes)) {  echo $pac_prod_6un->entradas_mes; } else {echo 0; }; echo '</span>
-
-
-                <input type="number" name="6un_idprod'. $prod->ID .'" class="form-control" placeholder="Add aqui!">
-
-            </div>
-          </li>
-          ';}elseif($prod->Produto_nome == "Medalhões"){ echo '
-            <li class="list-group-item">
+          <?php switch ($prod->Produto_nome) {
+            case "Almôndegas":
+            case "Medalhões":
+            foreach ($pacotes_produtos6 as $pac_prod_6un){
+              echo '
+              <li class="list-group-item">
               <div class="input-group input-group-md">
-                <span class="input-group-text">6 un. total = ';  if (isset($pac_prod_6un->entradas_mes)) {  echo $pac_prod_6un->entradas_mes; } else {echo 0; }; echo '</span>
+                <span class="input-group-text">6 </span>
 
 
-                  <input type="number" name="6un_idprod'. $prod->ID .'" class="form-control" placeholder="Add aqui!">
+                  <input type="number" name="6un_idprod'. $prod->ID .'" class="form-control" placeholder="';  if (isset($pac_prod_6un->entradas_mes)) {  echo $pac_prod_6un->entradas_mes; } else {echo 0; }; echo '">
 
               </div>
             </li>
+            ';}
+              break;
 
-        ';}else{ echo '
-            <li class="list-group-item">
-              <div class="input-group input-group-md">
-                <span class="input-group-text">5 un. atual = '; if (isset($pac_prod_5un->entradas_mes)) {  echo  $pac_prod_5un->entradas_mes; } else {echo 0; }; echo  '</span>
+            default:
+            echo '
+                <li class="list-group-item">
+                  <div class="input-group input-group-md">
+                    <span class="input-group-text">5 </span>
 
 
-                <input type="number" name="5un_idprod'. $prod->ID .'" class="form-control" placeholder="Add aqui!">
+                    <input type="number" name="5un_idprod'. $prod->ID .'" class="form-control" placeholder="'; if (isset($pac_prod_5un->entradas_mes)) {  echo  $pac_prod_5un->entradas_mes; } else {echo 0; }; echo  '">
 
-              </div>
-            </li>
+                  </div>
+                </li>
 
-            ';} ?>
-          <?php if($prod->Produto_nome == "Almôndegas"){ echo '
+
+                ';
+                break;
+              }
+
+          if($prod->Produto_nome == "Almôndegas"){ echo '
           <li class="list-group-item">
             <div class="input-group input-group-md">
               <span class="input-group-text">9 un. total = ';  if (isset($pac_prod_9un->entradas_mes)) {  echo $pac_prod_9un->entradas_mes; } else {echo 0; }; echo '</span>
