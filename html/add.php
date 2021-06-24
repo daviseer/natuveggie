@@ -169,6 +169,17 @@ foreach ($produto as $prod) {
               </div>
             </li>
             ';}
+            foreach ($pacotes_produtos9 as $pac_prod_9un){echo '
+            <li class="list-group-item">
+              <div class="input-group input-group-md">
+                <span class="input-group-text">9 </span>
+
+
+                  <input type="number" name="9un_idprod'. $prod->ID .'" class="form-control" placeholder="';  if (isset($pac_prod_9un->entradas_mes)) {  echo $pac_prod_9un->entradas_mes; } else {echo 0; }; echo '">
+
+              </div>
+            </li>
+            ';}
               break;
 
             default:
@@ -182,57 +193,43 @@ foreach ($produto as $prod) {
 
                   </div>
                 </li>
+                <li class="list-group-item">
+                  <div class="input-group input-group-md">
+                    <span class="input-group-text">10un. atual= '; if (isset($pac_prod_10un->entradas_mes)) {  echo  $pac_prod_10un->entradas_mes; } else {echo 0; }; echo  '</span>
+
+
+                    <input type="number" name="10un_idprod'. $prod->ID .'" class="form-control" placeholder="Add aqui!">
+
+                  </div>
+                </li>
 
 
                 ';
                 break;
               }
 
-          if($prod->Produto_nome == "Almôndegas"){ echo '
-          <li class="list-group-item">
-            <div class="input-group input-group-md">
-              <span class="input-group-text">9 un. total = ';  if (isset($pac_prod_9un->entradas_mes)) {  echo $pac_prod_9un->entradas_mes; } else {echo 0; }; echo '</span>
 
-
-                <input type="number" name="9un_idprod'. $prod->ID .'" class="form-control" placeholder="Add aqui!">
-
-            </div>
-          </li>
-          ';}elseif($prod->Produto_nome == "Medalhões"){ echo '
-            <li class="list-group-item">
-              <div class="input-group input-group-md">
-                <span class="input-group-text">9 un. total = ';  if (isset($pac_prod_9un->entradas_mes)) {  echo $pac_prod_9un->entradas_mes; } else {echo 0; }; echo '</span>
-
-
-                  <input type="number" name="9un_idprod'. $prod->ID .'" class="form-control" placeholder="Add aqui!">
-
-              </div>
-            </li>
-
-        ';}else{ echo '
-            <li class="list-group-item">
-              <div class="input-group input-group-md">
-                <span class="input-group-text">10un. atual= '; if (isset($pac_prod_10un->entradas_mes)) {  echo  $pac_prod_10un->entradas_mes; } else {echo 0; }; echo  '</span>
-
-
-                <input type="number" name="10un_idprod'. $prod->ID .'" class="form-control" placeholder="Add aqui!">
-
-              </div>
-            </li>
-
-            ';} ?>
-            <!-- <li class="list-group-item">
-              <div class="input-group input-group-md">
-                <span class="input-group-text">10 un. total =<?php  if (isset($pac_prod_10un->entradas_mes)) {  echo  $pac_prod_10un->entradas_mes; } else {echo 0; }  ?></span>
-
-
-                  <input type="number" name="10un_idprod<?php echo $prod->ID; ?>" class="form-control" placeholder="Add aqui!">
-
-              </div>
-            </li> -->
+?>
                 </ul>
-        <h5 class="card-header">Total: </h5><br>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <!-- <h5 class="card-header">Total:
+        <?php
+  //
+// O problema é multiplicar os pacotes pelos valores deles mesmos e somar tudo no final; nao é prioridade agora
+  // $soma_total_select = "SELECT e.PRODUTO_ID,
+  // SUM(e.quantidade) entradas_mes
+  // FROM log_estoque as e
+  // WHERE e.dh_movimento between '2021-01-01 00:01:00' and '2022-01-01 00:01:00'
+  // and e.movimento = 'E' and e.PRODUTO_ID =' ".$prod->ID."'
+  // group by 1";
+  // $soma_total = $con->query($soma_total_select);
+  // $soma_total_result = $soma_total->fetchAll(PDO::FETCH_OBJ);
+  // echo $soma_total_result->entradas_mes;
+
+
+
+         ?>
+       </h5><br> -->
+        <button type="submit" class="btn btn-primary" form="margin: 5%">Enviar</button>
       </form>
     </div>
   </div>
