@@ -93,5 +93,5 @@ if($_POST['9un_idprod'.$id_produto]>0){
 
 
 
-header('Location:../?page=add&ok=yes');
+header('Location:../?page=remove&ok=yes');
  ?>

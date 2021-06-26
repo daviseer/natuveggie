@@ -17,7 +17,7 @@
 
 <div class="row justify-content-md-center align-items-center">
   <div class="col-md12">
-   <h3 class="alert alert-danger">Adicionar um por um!</h3>
+    <h3 class="alert alert-danger" style="margin-bottom: 12%">Adicionar um produto de cada vez!</h3>
  </div>
 </div>
 <div class="row align-items-start">
@@ -41,19 +41,24 @@ $resultado2 = $con->query($sql2);
 $produto = $resultado2->fetchAll(PDO::FETCH_OBJ);
 //para cada item anterior (ou seja, cada nome de produto) faz parte do loop
 foreach ($produto as $prod) {
+
+//
   $sql_pacotes_produtos_2un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
   CASE
-WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
-ELSE e.QUANTIDADE * -1
+	WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+	ELSE e.QUANTIDADE * -1
 END quantidade,
-SUM(e.quantidade) entradas,
-(select
-sum(el.quantidade) from log_estoque el
-where el.PRODUTO_ID = e.PRODUTO_ID
-and el.movimento = "E") -
-(select sum(el.quantidade) from log_estoque el
-where el.PRODUTO_ID = e.PRODUTO_ID
-and el.movimento = "S") AS saldo
+  sum(e.quantidade) entradas,
+  (select
+sum(el.quantidade) from log_estoque as el
+	INNER JOIN produtos as p ON el.PRODUTO_ID = p.ID
+	where el.movimento = "E" and  el.PACOTE_ID = 1 and p.Produto_nome = "' . $prod->Produto_nome . '")
+
+- (select
+sum(el.quantidade) from log_estoque as el
+	INNER JOIN produtos as p ON el.PRODUTO_ID = p.ID
+	where el.movimento = "S" and  el.PACOTE_ID = 1 and p.Produto_nome = "'. $prod->Produto_nome . '"
+  )  AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -72,23 +77,27 @@ and el.movimento = "S") AS saldo
 //
   $sql_pacotes_produtos_5un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
   CASE
-WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
-ELSE e.QUANTIDADE * -1
+	WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+	ELSE e.QUANTIDADE * -1
 END quantidade,
-SUM(e.quantidade) entradas,
-(select
-sum(el.quantidade) from log_estoque el
-where el.PRODUTO_ID = e.PRODUTO_ID
-and el.movimento = "E") -
-(select sum(el.quantidade) from log_estoque el
-where el.PRODUTO_ID = e.PRODUTO_ID
-and el.movimento = "S") AS saldo
+  sum(e.quantidade) entradas,
+  (select
+sum(el.quantidade) from log_estoque as el
+	INNER JOIN produtos as p ON el.PRODUTO_ID = p.ID
+	where el.movimento = "E" and  el.PACOTE_ID = 2 and p.Produto_nome = "' . $prod->Produto_nome . '")
+
+- (select
+sum(el.quantidade) from log_estoque as el
+	INNER JOIN produtos as p ON el.PRODUTO_ID = p.ID
+	where el.movimento = "S" and  el.PACOTE_ID = 2 and p.Produto_nome = "'. $prod->Produto_nome . '"
+  )  AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
   WHERE e.dh_movimento between "2021-01-01 00:01:00" and "2022-01-01 00:01:00"
   AND e.movimento = "E" and pac.tipo = "5un" and p.Produto_nome= "' . $prod->Produto_nome . '"
   GROUP BY 2';
+
 
   $result_pac5 = $con->query($sql_pacotes_produtos_5un);
   $pacotes_produtos5 = $result_pac5->fetchAll(PDO::FETCH_OBJ);
@@ -97,17 +106,20 @@ and el.movimento = "S") AS saldo
 //
   $sql_pacotes_produtos_10un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
   CASE
-WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
-ELSE e.QUANTIDADE * -1
+	WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+	ELSE e.QUANTIDADE * -1
 END quantidade,
-SUM(e.quantidade) entradas,
-(select
-sum(el.quantidade) from log_estoque el
-where el.PRODUTO_ID = e.PRODUTO_ID
-and el.movimento = "E") -
-(select sum(el.quantidade) from log_estoque el
-where el.PRODUTO_ID = e.PRODUTO_ID
-and el.movimento = "S") AS saldo
+  sum(e.quantidade) entradas,
+  (select
+sum(el.quantidade) from log_estoque as el
+	INNER JOIN produtos as p ON el.PRODUTO_ID = p.ID
+	where el.movimento = "E" and  el.PACOTE_ID = 3 and p.Produto_nome = "' . $prod->Produto_nome . '")
+
+- (select
+sum(el.quantidade) from log_estoque as el
+	INNER JOIN produtos as p ON el.PRODUTO_ID = p.ID
+	where el.movimento = "S" and  el.PACOTE_ID = 3 and p.Produto_nome = "'. $prod->Produto_nome . '"
+  )  AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -121,17 +133,20 @@ and el.movimento = "S") AS saldo
 //
   $sql_pacotes_produtos_6un ='SELECT e.PRODUTO_ID, e.PACOTE_ID, p.Produto_nome, pac.tipo,
   CASE
-WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
-ELSE e.QUANTIDADE * -1
+	WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
+	ELSE e.QUANTIDADE * -1
 END quantidade,
-SUM(e.quantidade) entradas,
-(select
-sum(el.quantidade) from log_estoque el
-where el.PRODUTO_ID = e.PRODUTO_ID
-and el.movimento = "E") -
-(select sum(el.quantidade) from log_estoque el
-where el.PRODUTO_ID = e.PRODUTO_ID
-and el.movimento = "S") AS saldo
+  sum(e.quantidade) entradas,
+  (select
+sum(el.quantidade) from log_estoque as el
+	INNER JOIN produtos as p ON el.PRODUTO_ID = p.ID
+	where el.movimento = "E" and  el.PACOTE_ID = 4 and p.Produto_nome = "' . $prod->Produto_nome . '")
+
+- (select
+sum(el.quantidade) from log_estoque as el
+	INNER JOIN produtos as p ON el.PRODUTO_ID = p.ID
+	where el.movimento = "S" and  el.PACOTE_ID = 4 and p.Produto_nome = "'. $prod->Produto_nome . '"
+  )  AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -150,14 +165,17 @@ and el.movimento = "S") AS saldo
 	WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
 	ELSE e.QUANTIDADE * -1
 END quantidade,
-SUM(e.quantidade) entradas,
+  sum(e.quantidade) entradas,
   (select
-sum(el.quantidade) from log_estoque el
-	where el.PRODUTO_ID = e.PRODUTO_ID
-  and el.movimento = "E") -
-(select sum(el.quantidade) from log_estoque el
-	where el.PRODUTO_ID = e.PRODUTO_ID
-	and el.movimento = "S") AS saldo
+sum(el.quantidade) from log_estoque as el
+	INNER JOIN produtos as p ON el.PRODUTO_ID = p.ID
+	where el.movimento = "E" and  el.PACOTE_ID = 5 and p.Produto_nome = "' . $prod->Produto_nome . '")
+
+- (select
+sum(el.quantidade) from log_estoque as el
+	INNER JOIN produtos as p ON el.PRODUTO_ID = p.ID
+	where el.movimento = "S" and  el.PACOTE_ID = 5 and p.Produto_nome = "'. $prod->Produto_nome . '"
+  )  AS saldo
   FROM log_estoque as e
   INNER JOIN produtos as p ON e.PRODUTO_ID = p.ID
   INNER JOIN pacotes as pac ON e.PACOTE_ID = pac.idpacotes
@@ -197,7 +215,7 @@ sum(el.quantidade) from log_estoque el
 
                 <input type="hidden" name="id_produto" value="<?php echo $prod->ID ?>">
 
-                <input type="number" name="2un_idprod<?php echo $prod->ID; ?>" class="form-control" placeholder="<?php  if (isset($pac_prod_2un->saldo)) {  echo  $pac_prod_2un->saldo; } else {echo $pac_prod_2un->entradas; }  ?>" >
+                <input type="number" name="2un_idprod<?php echo $prod->ID; ?>" class="form-control" placeholder="<?php  if (isset($pac_prod_2un->saldo)) {  echo $pac_prod_2un->saldo; } elseif (isset($pac_prod_2un->entradas)){  echo $pac_prod_2un->entradas; }else{echo 0;}  ?>" >
 
             </div>
           </li>
@@ -223,7 +241,7 @@ sum(el.quantidade) from log_estoque el
                 <span class="input-group-text">9 </span>
 
 
-                  <input type="number" name="9un_idprod'. $prod->ID .'" class="form-control" placeholder="';  if (isset($pac_prod_9un->saldo)) {  echo $pac_prod_9un->saldo; } else {echo $pac_prod_9un->entradas; }; echo '">
+                  <input type="number" name="9un_idprod'. $prod->ID .'" class="form-control" placeholder="';  if (isset($pac_prod_9un->saldo)) {  echo $pac_prod_9un->saldo; } elseif (isset($pac_prod_9un->entradas)){  echo $pac_prod_9un->entradas; }else{echo 0;}; echo '">
 
               </div>
             </li>
@@ -237,7 +255,7 @@ sum(el.quantidade) from log_estoque el
                     <span class="input-group-text">5 </span>
 
 
-                    <input type="number" name="5un_idprod'. $prod->ID .'" class="form-control" placeholder="'; if (isset($pac_prod_5un->saldo)) {  echo  $pac_prod_5un->saldo; } else {echo $pac_prod_5un->entradas; }; echo  '">
+                    <input type="number" name="5un_idprod'. $prod->ID .'" class="form-control" placeholder="'; if (isset($pac_prod_5un->saldo)) {  echo $pac_prod_5un->saldo; } elseif (isset($pac_prod_5un->entradas)){  echo $pac_prod_5un->entradas; }else{echo 0;}; echo  '">
 
                   </div>
                 </li>
@@ -246,7 +264,7 @@ sum(el.quantidade) from log_estoque el
                     <span class="input-group-text">10 </span>
 
 
-                    <input type="number" name="10un_idprod'. $prod->ID .'" class="form-control" placeholder="'; if (isset($pac_prod_10un->saldo)) {  echo  $pac_prod_10un->saldo; } else {echo $pac_prod_10un->entradas; }; echo  '">
+                    <input type="number" name="10un_idprod'. $prod->ID .'" class="form-control" placeholder="'; if (isset($pac_prod_10un->saldo)) {  echo $pac_prod_10un->saldo; } elseif (isset($pac_prod_10un->entradas)){  echo $pac_prod_10un->entradas; }else{echo 0;}; echo  '">
 
                   </div>
                 </li>
@@ -268,6 +286,7 @@ sum(el.quantidade) from log_estoque el
 // WHEN e.MOVIMENTO = "E" then e.QUANTIDADE
 // ELSE e.QUANTIDADE * -1
 // END quantidade,
+//  sum(e.quantidade) entradas,
 //SUM(e.quantidade) entradas,
 // (select
 // sum(el.quantidade) from log_estoque el

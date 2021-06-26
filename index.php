@@ -12,6 +12,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+      <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
 
   </head>
   <body>
@@ -49,7 +50,7 @@
 
               echo '<div class="row justify-content-md-center align-items-center" style="margin: 2%">
                       <div class="col-md-12">
-                        <h4 class="alert alert-success">Adicionado com sucesso!</h4>
+                        <h4 class="alert alert-success">Registrado com sucesso!</h4>
                       </div>
                     </div>';
 
@@ -57,7 +58,7 @@
               case 'no':
               echo '<div class="row justify-content-md-center align-items-center" style="margin: 2%">
                       <div class="col-md-12">
-                        <h4 class="alert alert-danger">Não adicionado! Registro menor que 0, não foi registrado</h4>
+                        <h4 class="alert alert-danger">Não registrado! Registro menor que 0, não foi registrado</h4>
                       </div>
                     </div>';
               break;
