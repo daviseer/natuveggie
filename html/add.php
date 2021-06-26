@@ -211,8 +211,16 @@ sum(el.quantidade) from log_estoque as el
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <div class="input-group input-group-md">
-              <i class="fas fa-shopping-bag fa-2x"> </i>
-              <span class="input-group-text">2 </span>
+              <span class="input-group-text">
+                <div style="font-size: 30%">
+
+                <span class="fa-stack fa-2x">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fas fa-tag fa-stack-1x fa-inverse "></i>
+                </span>
+              </div>
+                2
+              </span>
 
                 <input type="hidden" name="id_produto" value="<?php echo $prod->ID ?>">
 
