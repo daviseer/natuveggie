@@ -19,45 +19,54 @@
 
 
     <div class="container">
-      <div class="row fixed-top align-items-center">
-        <div class="col-12 text-center" style="background-color: white !important">
-          <h1 class="display-4 ">Estoque Natuveggie</h1>
+      <div class="row align-items-center">
+        <div class="col-sm-12 text-center" style="background-color: white !important; margin: 3% auto 3% auto">
+          <h1 class="display-5 ">Estoque Natuveggie</h1>
 
         </div>
 
       </div>
-      <div class="row align-items-center" style="margin-top: 10%">
-        <div class="col-md-12 align-items-center" >
+      <div class="row  justify-content-center" style="margin-top: 5%">
+        <div class="col-sm text-center "style="margin: 2% auto 2% auto" >
           <a href="?page=estoque_ver">
             <button type="button" class="btn btn-primary btn-lg">Ver estoque</button>
           </a>
+        </div>
+        <div class="col-sm text-center "style="margin: 2% auto 2% auto" >
           <a href="?page=add">
             <button  type="button" class="btn btn-success btn-lg">Adicionar produtos</button>
           </a>
+          </div>
+          <div class="col-sm text-center "style="margin: 2% auto 2% auto" >
           <a href="?page=remove">
             <button  type="button" class="btn btn-danger btn-lg">Retirar produtos</button>
           </a>
+          </div>
+          <div class="col-sm text-center "style="margin: 2% auto 2% auto" >
           <a href="?page=history">
             <button  type="button" class="btn btn-info btn-lg">Histórico</button>
           </a>
+          </div>
         </div>
       </div>
+
+
 
 
             <?php $ok_confirm = filter_input(INPUT_GET, 'ok');  ;
             switch ($ok_confirm) {
               case 'yes':
 
-              echo '<div class="row justify-content-md-center align-items-center" style="margin: 2%">
-                      <div class="col-md-12">
+              echo '<div class="row justify-content-sm-center align-items-center" style="margin: 2%">
+                      <div class="col-sm-12">
                         <h4 class="alert alert-success">Registrado com sucesso!</h4>
                       </div>
                     </div>';
 
               break;
               case 'no':
-              echo '<div class="row justify-content-md-center align-items-center" style="margin: 2%">
-                      <div class="col-md-12">
+              echo '<div class="row justify-content-sm-center align-items-center" style="margin: 2%">
+                      <div class="col-sm-12">
                         <h4 class="alert alert-danger">Não registrado! Registro menor que 0, não foi registrado</h4>
                       </div>
                     </div>';
@@ -68,17 +77,10 @@
             ?>
 
 
+            <div class="container">
 
-        <div class="row justify-content-md-center align-items-center">
-          <div class="col-md-12">
-
-
-
-          </div>
-        </div>
-
-      <div class="row align-items-center"style="margin-top: 5%">
-        <div class="col-md-12 align-items-center" >
+      <div class="row align-items-center justify-content-sm-center" style="margin-top: 5%">
+        <div class="col-sm-12 align-items-center" >
           <?php
 //                    PAGINAS
           $page = filter_input(INPUT_GET, 'page');
@@ -103,6 +105,7 @@
       </div>
 
     </div>
+
 
 
 

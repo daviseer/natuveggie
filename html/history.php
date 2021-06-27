@@ -1,4 +1,3 @@
-<div class="row align-items-center">
 
   <?php
   require_once 'bd/Conexao.php';
@@ -107,15 +106,12 @@
 <input type="text" id="myInput" onkeyup="funcaoPesquisa()" placeholder="Pesquise aqui" style=" margin: 2%">
 <br>
 
-    <table class="table table-bordered table-striped table-responsive-md table-hover" id="myTable">
+    <table class="table table-bordered table-striped table-responsive-sm table-hover" id="myTable">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Produto</th>
           <th scope="col">Tipo de Pacote</th>
-          <th scope="col">Entrada ou Saída
-              
-
-          </th>
+          <th scope="col">Entrada ou Saída</th>
           <th scope="col">Quantidade</th>
           <th scope="col">Data e hora</th>
         </tr>
@@ -162,4 +158,3 @@
       </tbody>
     </table>
   </div>
-</div>

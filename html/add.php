@@ -15,8 +15,8 @@
 </div> -->
 
 
-<div class="row justify-content-md-center align-items-center">
-  <div class="col-md12">
+<div class="row align-items-center justify-content-center">
+  <div class="col-sm12">
     <h3 class="alert alert-danger" style="margin-bottom: 12%">Adicionar um produto de cada vez!</h3>
  </div>
 </div>
@@ -202,7 +202,7 @@ sum(el.quantidade) from log_estoque as el
     }
 ?>
 <!-- CARDS -->
-<div class="col-4" >
+<div class="col-sm-4 align-self-center" >
   <div class="card border-dark text-center" style="width: 18rem; margin: 1%">
     <div class="card-body" style="padding-left: 0%; padding-right: 0%;" >
       <h2 class="card-title text-center " ><?php echo $prod->Produto_nome; ?></h2>
@@ -210,14 +210,14 @@ sum(el.quantidade) from log_estoque as el
         <h5 class="card-header text-center" >Pacotes:</h5>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <div class="input-group input-group-md">
+            <div class="input-group input-group-sm">
               <span class="input-group-text">
                 <div style="font-size: 30%">
 
-                <span class="fa-stack fa-2x">
+                <!-- <span class="fa-stack fa-2x">
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fas fa-tag fa-stack-1x fa-inverse "></i>
-                </span>
+                </span> -->
               </div>
                 2
               </span>
@@ -235,7 +235,7 @@ sum(el.quantidade) from log_estoque as el
             foreach ($pacotes_produtos6 as $pac_prod_6un){
               echo '
               <li class="list-group-item">
-              <div class="input-group input-group-md">
+              <div class="input-group input-group-sm">
                 <span class="input-group-text">6 </span>
 
 
@@ -246,7 +246,7 @@ sum(el.quantidade) from log_estoque as el
             ';}
             foreach ($pacotes_produtos9 as $pac_prod_9un){echo '
             <li class="list-group-item">
-              <div class="input-group input-group-md">
+              <div class="input-group input-group-sm">
                 <span class="input-group-text">9 </span>
 
 
@@ -260,7 +260,7 @@ sum(el.quantidade) from log_estoque as el
             default:
             echo '
                 <li class="list-group-item">
-                  <div class="input-group input-group-md">
+                  <div class="input-group input-group-sm">
                     <span class="input-group-text">5 </span>
 
 
@@ -269,7 +269,7 @@ sum(el.quantidade) from log_estoque as el
                   </div>
                 </li>
                 <li class="list-group-item">
-                  <div class="input-group input-group-md">
+                  <div class="input-group input-group-sm">
                     <span class="input-group-text">10 </span>
 
 
