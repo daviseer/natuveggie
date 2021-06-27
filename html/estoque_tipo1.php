@@ -221,10 +221,6 @@
                             case 'Almôndegas':
                               echo "<br>";
                             break;
-
-
-
-
                             //para  unidades 2, 5 e 10:
                             default:
 

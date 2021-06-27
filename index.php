@@ -93,6 +93,9 @@
               case 'remove':
                 require 'html/remove.php';
                 break;
+              case 'history':
+                require 'html/history.php';
+                break;
           }
           ?>
         </div>
