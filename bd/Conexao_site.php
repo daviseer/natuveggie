@@ -5,7 +5,7 @@ class Conexao extends PDO {
     private $banco = 'seerde54_natuveggie';
     private $user = 'seerde54_mysql';
     private $senha = 'Dinhoechi@12';
-    private $host = '108.167.132.245';
+    private $host = '108.167.132.246';
 
     function __construct() {
         $dsn = 'mysql:host='.$this->host.';dbname=' . $this->banco;

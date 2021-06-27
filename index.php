@@ -84,7 +84,8 @@
           $page = filter_input(INPUT_GET, 'page');
           switch ($page) {
               case 'estoque_ver':
-                require 'html/estoque_ver.php';
+                require 'html/estoque_tipo1.php';
+                require 'html/estoque_tipo2.php';
                 break;
               case 'add':
                 require 'html/add.php';
