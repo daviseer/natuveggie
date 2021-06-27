@@ -15,8 +15,8 @@
 </div> -->
 
 
-<div class="row justify-content-md-center align-items-center">
-  <div class="col-md12">
+<div class="row justify-content-sm-center align-items-center">
+  <div class="col-sm12">
     <h3 class="alert alert-danger" style="margin-bottom: 12%">Remover um produto de cada vez!</h3>
   </div>
 </div>
@@ -202,7 +202,7 @@
                     }
                     ?>
                     <!-- CARDS -->
-                    <div class="col-4" >
+                    <div class="col-sm-4 align-self-center" >
                       <div class="card border-dark text-center" style="width: 18rem; margin: 1%">
                         <div class="card-body" style="padding-left: 0%; padding-right: 0%;" >
                           <h2 class="card-title text-center " ><?php echo $prod->Produto_nome; ?></h2>
@@ -210,7 +210,7 @@
                             <h5 class="card-header text-center" >Pacotes:</h5>
                             <ul class="list-group list-group-flush">
                               <li class="list-group-item">
-                                <div class="input-group input-group-md">
+                                <div class="input-group input-group-sm">
                                   <span class="input-group-text">2 </span>
 
                                   <input type="hidden" name="id_produto" value="<?php echo $prod->ID ?>">
@@ -226,7 +226,7 @@
                                 foreach ($pacotes_produtos6 as $pac_prod_6un){
                                   echo '
                                   <li class="list-group-item">
-                                  <div class="input-group input-group-md">
+                                  <div class="input-group input-group-sm">
                                   <span class="input-group-text">6 </span>
 
 
@@ -237,7 +237,7 @@
                                   ';}
                                   foreach ($pacotes_produtos9 as $pac_prod_9un){echo '
                                     <li class="list-group-item">
-                                    <div class="input-group input-group-md">
+                                    <div class="input-group input-group-sm">
                                     <span class="input-group-text">9 </span>
 
 
@@ -251,7 +251,7 @@
                                     default:
                                     echo '
                                     <li class="list-group-item">
-                                    <div class="input-group input-group-md">
+                                    <div class="input-group input-group-sm">
                                     <span class="input-group-text">5 </span>
 
 
@@ -260,7 +260,7 @@
                                     </div>
                                     </li>
                                     <li class="list-group-item">
-                                    <div class="input-group input-group-md">
+                                    <div class="input-group input-group-sm">
                                     <span class="input-group-text">10 </span>
 
 
