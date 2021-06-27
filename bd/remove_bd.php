@@ -1,6 +1,6 @@
 <?php
+header('Location:../?page=remove&ok=yes');
 require 'Conexao.php';
-
 $con = new Conexao();
 //pega do BD os nomes dos produtos
 // $query2 = 'SELECT p.* FROM pacotes AS p ';
@@ -93,5 +93,5 @@ if($_POST['9un_idprod'.$id_produto]>0){
 
 
 
-header('Location:../?page=remove&ok=yes');
+
  ?>

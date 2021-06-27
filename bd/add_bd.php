@@ -1,4 +1,5 @@
 <?php
+header('Location:../?page=add&ok=yes');
 require 'Conexao.php';
 
 $con = new Conexao();
@@ -90,7 +91,7 @@ if($_POST['9un_idprod'.$id_produto]>0){
  echo "Registro menor que 0, não foi registrado";
  // header('Location:../?page=add&ok=no');
 }
-header('Location:../?page=add&ok=yes');
+
 
 
 
