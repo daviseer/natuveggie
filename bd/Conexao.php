@@ -6,6 +6,7 @@ class Conexao extends PDO {
     private $user = 'root';
     private $senha = '';
 
+
     function __construct() {
         $dsn = 'mysql:host=localhost;dbname=' . $this->banco;
         $options = [
