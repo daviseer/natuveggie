@@ -98,6 +98,10 @@
               case 'history':
                 require 'html/history.php';
                 break;
+              default:
+              require 'html/estoque_tipo1.php';
+              require 'html/estoque_tipo2.php';
+              break;
           }
           ?>
         </div>
